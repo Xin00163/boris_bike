@@ -21,7 +21,7 @@ describe DockingStation do
     newbike = Bike.new
     expect(subject.dock(newbike)).to be_a Array
     expect(subject.release_bike).to eq(newbike)
-    expect { subject.release_bike}.to raise_error("There are no bikes")
+    expect {subject.release_bike}.to raise_error("There are no bikes")
   end
 
 end
