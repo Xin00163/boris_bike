@@ -1,19 +1,31 @@
 class DockingStation
-  attr_reader :bikes
+  DEFAULT_CAPACITY = 20
 
-  def initialize
+  attr_reader :bikes
+  attr_accessor :capacity
+
+
+  def initialize(capacity = DEFAULT_CAPACITY)
     @bikes = []
+    @capacity = capacity
   end
 
   def dock(bike)
-    raise "Docking station is full" if @bikes.length >= 20
-    @bikes.push(bike)
+      raise "Docking station is full" if full?
+      @bikes << bike
+    end
+
+    def release_bike
+      raise "There are no bikes" if empty?
+      @bikes.pop
+    end
+
+    private
+      def full?
+        @bikes.count >= @capacity
+      end
+
+      def empty?
+        @bikes.empty?
+      end
   end
-
-  def release_bike
-    raise 'There are no bikes' if @bikes.length == 0
-    @bikes.pop()
-  end
-
-
-end
